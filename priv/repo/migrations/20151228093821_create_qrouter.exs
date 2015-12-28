@@ -1,0 +1,11 @@
+defmodule BuckcalcWeb.Repo.Migrations.CreateQrouter do
+  use Ecto.Migration
+
+  def change do
+  	create table(:qrouter) do
+  		add :question_id, references(:questions)
+  		add :user_id, references(:users)
+      timestamps
+    end  
+  end
+end
