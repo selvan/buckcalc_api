@@ -3,7 +3,7 @@ defmodule BuckcalcWeb.Repo.Migrations.CreateQchat do
 
   def change do
   	create table(:qchat) do
-  		add :question_id, references(:questions)
+  		add :qrouter_id, references(:qrouter)
   		add :user_id, references(:users)
   		add :body, :json
       timestamps

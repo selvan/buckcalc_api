@@ -15,5 +15,5 @@ config :buckcalc_web, BuckcalcWeb.Repo,
   username: "postgres",
   password: "postgres",
   database: "buckcalc_web_test",
-  hostname: "localhost",
+  hostname: "192.168.99.100",
   pool: Ecto.Adapters.SQL.Sandbox
