@@ -2,9 +2,9 @@ defmodule BuckcalcWeb.QChat do
   use BuckcalcWeb.Web, :model
 
   schema "qchat" do
-    field :body, :json
-    belongs_to :qroutings, BuckcalcWeb.QRouting
-    belongs_to :sent_by, {"users", BuckcalcWeb.User}, foreign_key: :sent_by
+    field :body, :map
+    belongs_to :qroutings, BuckcalcWeb.QRouting, foreign_key: :qrouting_id
+    belongs_to :sender, {"user", BuckcalcWeb.User}, foreign_key: :sent_by
   end
 
   @required_fields ~w()

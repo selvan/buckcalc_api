@@ -2,11 +2,11 @@ defmodule BuckcalcWeb.Question do
   use BuckcalcWeb.Web, :model
 
   schema "questions" do
-    field :question, :json
-    belongs_to :asked_by, {"users", BuckcalcWeb.User}, foreign_key: :asked_by
+    field :question, :map
+    belongs_to :owner, {"users", BuckcalcWeb.User}, foreign_key: :asked_by
 
     has_many :routings, BuckcalcWeb.QRouting
-    has_many :analysts, through: [:routings, :answered_by]
+    has_many :analysts, through: [:routings, :analyst]
   end
 
   @required_fields ~w()
