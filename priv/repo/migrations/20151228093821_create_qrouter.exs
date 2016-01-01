@@ -4,7 +4,7 @@ defmodule BuckcalcWeb.Repo.Migrations.CreateQrouter do
   def change do
   	create table(:qrouter) do
   		add :question_id, references(:questions)
-  		add :user_id, references(:users)
+  		add :answered_by, references(:users) 
       timestamps
     end  
   end
