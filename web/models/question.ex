@@ -6,7 +6,7 @@ defmodule BuckcalcWeb.Question do
     belongs_to :owner, {"users", BuckcalcWeb.User}, foreign_key: :asked_by
 
     has_many :routings, BuckcalcWeb.QRouting
-    has_many :analysts, through: [:routings, :analyst]
+    has_many :analysts, through: [:routings, :answered_by]
   end
 
   @required_fields ~w()
