@@ -3,7 +3,7 @@ defmodule BuckcalcWeb.Repo.Migrations.CreateQuestion do
 
   def change do
   	create table(:questions) do
-  		add :question, :text, null: false
+  		add :question, :json, null: false
   		add :asked_by, references(:users), null: false
       timestamps
     end  		

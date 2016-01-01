@@ -1,16 +1,13 @@
-defmodule BuckcalcWeb.User do
+defmodule BuckcalcWeb.QChat do
   use BuckcalcWeb.Web, :model
 
-  schema "users" do
-    field :name, :string
-    field :email, :string
-    field :password_digest, :string
-    field :role, :string
-
-    has_many :questions, BuckcalcWeb.Question, foreign_key: :asked_by
+  schema "qchat" do
+    field :body, :json
+    belongs_to :qroutings, BuckcalcWeb.QRouting
+    belongs_to :sent_by, {"users", BuckcalcWeb.User}, foreign_key: :sent_by
   end
 
-  @required_fields ~w(name email password_digest role)
+  @required_fields ~w()
   @optional_fields ~w()
 
   @doc """
