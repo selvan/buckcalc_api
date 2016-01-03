@@ -6,6 +6,9 @@ defmodule BuckcalcWeb.Repo.Migrations.CreateQrouter do
   		add :question_id, references(:questions)
   		add :answered_by, references(:users) 
       timestamps
-    end  
+    end
+
+    create index(:qroutings, [:question_id, :answered_by])  
   end
 end
+

@@ -3,12 +3,13 @@ defmodule BuckcalcWeb.Repo.Migrations.CreateUser do
 
   def change do
     create table(:users) do
-      add :name, :string, null: false
+      add :name, :string
       add :email, :string, null: false
-      add :password_digest, :string, null: false
-      add :role, :string, null: false, default: "user"
+      add :password_digest, :string
+      add :role, :string, default: "user"
       timestamps
     end
 
+    create unique_index(:users, [:email])
   end
 end

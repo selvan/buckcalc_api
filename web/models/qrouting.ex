@@ -4,7 +4,8 @@ defmodule BuckcalcWeb.QRouting do
   schema "qroutings" do
     belongs_to :question, BuckcalcWeb.Question
     belongs_to :analyst, {"users", BuckcalcWeb.User}, foreign_key: :answered_by
-
+    timestamps
+    
     has_many :chats, {"qchat", BuckcalcWeb.QChat}, foreign_key: :qrouting_id
   end
 

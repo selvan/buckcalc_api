@@ -6,11 +6,12 @@ defmodule BuckcalcWeb.User do
     field :email, :string
     field :password_digest, :string
     field :role, :string
+    timestamps
 
     has_many :questions, BuckcalcWeb.Question, foreign_key: :asked_by
   end
 
-  @required_fields ~w(name email password_digest role)
+  @required_fields ~w(email)
   @optional_fields ~w()
 
   @doc """
@@ -22,5 +23,6 @@ defmodule BuckcalcWeb.User do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+    |> unique_constraint(:email)
   end
 end
