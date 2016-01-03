@@ -9,7 +9,7 @@ defmodule BuckcalcWeb.QRouting do
     has_many :chats, {"qchat", BuckcalcWeb.QChat}, foreign_key: :qrouting_id
   end
 
-  @required_fields ~w()
+  @required_fields ~w(question_id answered_by)
   @optional_fields ~w()
 
   @doc """

@@ -5,12 +5,12 @@ defmodule BuckcalcWeb.Question do
     field :question, :string
     belongs_to :owner, {"users", BuckcalcWeb.User}, foreign_key: :asked_by
     timestamps
-    
+
     has_many :routings, BuckcalcWeb.QRouting
     has_many :analysts, through: [:routings, :answered_by]
   end
 
-  @required_fields ~w()
+  @required_fields ~w(question asked_by)
   @optional_fields ~w()
 
   @doc """

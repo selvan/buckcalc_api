@@ -5,7 +5,7 @@ defmodule BuckcalcWeb.Repo.Migrations.CreateQchat do
   	create table(:qchat) do
   		add :qrouting_id, references(:qroutings)
   		add :sent_by, references(:users)
-  		add :body, :text
+  		add :body, :text, null: false
       timestamps
     end  
     

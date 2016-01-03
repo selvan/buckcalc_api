@@ -10,20 +10,26 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
+alias BuckcalcWeb.Repo
+import Ecto.Query
+
+alias BuckcalcWeb.User
+alias BuckcalcWeb.Question
+alias BuckcalcWeb.QRouting
+alias BuckcalcWeb.QChat
+
+
 users = [
 	%{email: "user1@example.com"},
 	%{email: "user2@example.com"},
-]
-
-analysts = [
 	%{email: "analyst1@example.com"},
-	%{email: "analyst2@example.com"},
+	%{email: "analyst2@example.com"},	
 ]
 
 questions = [
-	{
+	%{
 		asked_by: "user1@example.com", 
-		question: %{question: "My tax related question is .."}, 
+		question: "My tax related question is ..", 
 		answered_by: "analyst1@example.com", 
 		chat: [
 			{"analyst1@example.com", "answer to your query is .."},
@@ -34,14 +40,55 @@ questions = [
 ]
 
 defmodule Seeds do
-
-	## Insert users
-	def insert_users([]), do: nil
-	def insert_users([h|t]) do
+	## Add users
+	def add_users([]), do: nil
+	def add_users([h|t]) do
 		changeset = User.changeset(%User{}, h)
-		BuckcalcWeb.Repo.insert!(%Country{name: country_name})
-		insert_users t
+		BuckcalcWeb.Repo.insert!(changeset)
+		add_users t
 	end
 
-	## Insert questions
+	## Add questions
+	def add_questions([]), do: nil
+	def add_questions([h|t]) do
+		qdata = h
+		u=fetch_user(qdata.asked_by)
+		changeset = Question.changeset(%Question{}, %{question: qdata.question, asked_by: u.id})
+		q=BuckcalcWeb.Repo.insert!(changeset)
+		r=add_routing(q, qdata.answered_by)
+		add_chat(r, qdata.chat)
+		add_questions(t)
+	end
+
+	## Add routing
+	def add_routing(q, answered_by_email) do
+		u=fetch_user(answered_by_email)
+		changeset = QRouting.changeset(%QRouting{}, %{question_id: q.id, answered_by: u.id})
+		BuckcalcWeb.Repo.insert!(changeset)	
+	end
+
+	## Add Chat
+	def add_chat(_, []), do: nil
+	def add_chat(r, [h|t]) do
+		{sender_email, body} = h
+		u=fetch_user(sender_email)
+		changeset = QChat.changeset(%QChat{}, %{qrouting_id: r.id, body: body, sent_by: u.id})
+		BuckcalcWeb.Repo.insert!(changeset)	
+		add_chat(r, t)
+	end
+
+	defp fetch_user(email) do
+		User |> where([u], u.email== ^email) |> Repo.all |> List.first
+	end
+
+	def reset_db do
+		QChat |> Repo.delete_all
+		QRouting |> Repo.delete_all
+		Question |> Repo.delete_all
+		User |> Repo.delete_all	
+	end
 end
+
+Seeds.reset_db
+Seeds.add_users(users)
+Seeds.add_questions(questions)

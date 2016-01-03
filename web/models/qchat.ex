@@ -9,7 +9,7 @@ defmodule BuckcalcWeb.QChat do
     belongs_to :sender, {"user", BuckcalcWeb.User}, foreign_key: :sent_by
   end
 
-  @required_fields ~w()
+  @required_fields ~w(qrouting_id sent_by body)
   @optional_fields ~w()
 
   @doc """
