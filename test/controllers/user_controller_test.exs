@@ -10,10 +10,8 @@ defmodule BuckcalcWeb.UserControllerTest do
   end
 
   test "lists all entries on index", %{conn: conn} do
-    import Ecto.Query
-    rows_count = User |> select([_], count("*")) |> Repo.one
     conn = get conn, user_path(conn, :index)
-    assert Enum.count(json_response(conn, 200)["data"]) == rows_count
+    assert json_response(conn, 200)["data"] == []
   end
 
   test "shows chosen resource", %{conn: conn} do

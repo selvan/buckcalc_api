@@ -7,7 +7,7 @@ defmodule BuckcalcWeb.Question do
     timestamps
 
     has_many :routings, BuckcalcWeb.QRouting
-    has_many :analysts, through: [:routings, :answered_by]
+    has_many :analysts, through: [:routings, :analyst]
   end
 
   @required_fields ~w(question asked_by)

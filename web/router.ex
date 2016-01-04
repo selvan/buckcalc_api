@@ -24,6 +24,7 @@ defmodule BuckcalcWeb.Router do
      pipe_through :api
      resources "/users", UserController, except: [:new, :edit]
      
-     get "/questions", QuestionController, :questions
+     get "/questions/:user_id", QuestionController, :index
+     post "/questions/:user_id", QuestionController, :create
   end
 end

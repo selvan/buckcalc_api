@@ -2,34 +2,35 @@ defmodule BuckcalcWeb.QuestionController do
   use BuckcalcWeb.Web, :controller
 
   alias BuckcalcWeb.Question
+  import Ecto.Query
   
-#   plug :scrub_params, "question" when action in [:create, :update]
+  plug :scrub_params, "question" when action in [:create]
 
-    def questions(conn, params) do
-        questions = Repo.all(Question)
-        render(conn, "questions.json", questions: questions)
+  def index(conn, %{"user_id" => user_id, "page_size" => page_size, "page_offset" => page_offset}) do
+    query = Question |> where([q], q.asked_by == ^user_id) |> preload([:analysts]) |> order_by([:inserted_at]) |> limit(^page_size) |> offset(^page_offset)
+    questions = query |> Repo.all
+    render(conn, "questions.json", questions: questions)
+  end
+    
+  def index(conn, %{"user_id" => user_id}) do
+    index(conn, %{"user_id" => user_id, "page_size" => 10, "page_offset" => 1})
+  end
+  
+  def create(conn, %{"user_id" => user_id, "question" => question_params}) do
+    changeset = Question.changeset(%Question{}, question_params)
+
+    case Repo.insert(changeset) do
+      {:ok, question} ->
+        conn
+        |> put_status(:created)
+        |> put_resp_header("location", question_path(conn, :show, question))
+        |> render("question.json", question: question)
+      {:error, changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(BuckcalcWeb.ChangesetView, "error.json", changeset: changeset)
     end
-
-#   def index(conn, _params) do
-#     questions = Repo.all(Question)
-#     render(conn, "index.json", questions: questions)
-#   end
-
-#   def create(conn, %{"question" => question_params}) do
-#     changeset = Question.changeset(%Question{}, question_params)
-
-#     case Repo.insert(changeset) do
-#       {:ok, question} ->
-#         conn
-#         |> put_status(:created)
-#         |> put_resp_header("location", question_path(conn, :show, question))
-#         |> render("show.json", question: question)
-#       {:error, changeset} ->
-#         conn
-#         |> put_status(:unprocessable_entity)
-#         |> render(BuckcalcWeb.ChangesetView, "error.json", changeset: changeset)
-#     end
-#   end
+  end
 
 #   def show(conn, %{"id" => id}) do
 #     question = Repo.get!(Question, id)
