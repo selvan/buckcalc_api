@@ -23,6 +23,7 @@ defmodule BuckcalcWeb.Router do
   scope "/api", BuckcalcWeb do
      pipe_through :api
      resources "/users", UserController, except: [:new, :edit]
-     resources "/questions", QuestionController, except: [:new, :edit]
+     
+     get "/questions", QuestionController, :questions
   end
 end

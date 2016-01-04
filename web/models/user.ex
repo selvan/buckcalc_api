@@ -12,7 +12,7 @@ defmodule BuckcalcWeb.User do
   end
 
   @required_fields ~w(email)
-  @optional_fields ~w()
+  @optional_fields ~w(name password_digest role)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
