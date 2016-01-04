@@ -6,26 +6,36 @@ defmodule BuckcalcWeb.QuestionController do
   
   plug :scrub_params, "question" when action in [:create]
 
-  def index(conn, %{"user_id" => user_id, "page_size" => page_size, "page_offset" => page_offset}) do
-    query = Question |> where([q], q.asked_by == ^user_id) |> preload([:analysts]) |> order_by([:inserted_at]) |> limit(^page_size) |> offset(^page_offset)
+  def index(conn, %{"user_id" => user_id, "page_size" => page_size, "page_offset" => page_offset}) do    
+    page_size = case Integer.parse(page_size) do
+        :error -> 10
+        {psize, _} -> psize
+    end
+    
+    page_offset = case Integer.parse(page_offset) do
+        :error -> 0
+        {poffset, _} -> poffset
+    end          
+    record_offset = page_offset * page_size
+    query = Question |> where([q], q.asked_by == ^user_id) |> preload([:analysts]) |> order_by([:inserted_at, :id]) |> limit(^page_size) |> offset(^record_offset)
     questions = query |> Repo.all
     render(conn, "questions.json", questions: questions)
   end
     
   def index(conn, %{"user_id" => user_id}) do
-    index(conn, %{"user_id" => user_id, "page_size" => 10, "page_offset" => 1})
+    index(conn, %{"user_id" => user_id, "page_size" => "10", "page_offset" => "0"})
   end
   
-  def create(conn, %{"user_id" => user_id, "question" => question_params}) do
-    changeset = Question.changeset(%Question{}, question_params)
+  def create(conn, %{"user_id" => user_id, "question" => question}) do
+    changeset = Question.changeset(%Question{}, %{question: question, asked_by: user_id})
 
     case Repo.insert(changeset) do
       {:ok, question} ->
         conn
         |> put_status(:created)
-        |> put_resp_header("location", question_path(conn, :show, question))
-        |> render("question.json", question: question)
+        |> render("question.json", question: (question |> Repo.preload([:analysts])))
       {:error, changeset} ->
+        
         conn
         |> put_status(:unprocessable_entity)
         |> render(BuckcalcWeb.ChangesetView, "error.json", changeset: changeset)

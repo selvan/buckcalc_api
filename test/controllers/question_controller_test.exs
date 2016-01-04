@@ -7,7 +7,7 @@ defmodule BuckcalcWeb.QuestionControllerTest do
   import Ecto.Repo
   import Ecto.Query
   
-  @valid_attrs %{}
+  @valid_attrs %{question: "my q is"}
   @invalid_attrs %{}
 
   setup %{conn: conn} do
@@ -23,18 +23,25 @@ defmodule BuckcalcWeb.QuestionControllerTest do
         Repo.transaction fn ->
             q=Repo.insert! %Question{question: "#{x}", asked_by: user.id}
             Repo.insert! %QRouting{question_id: q.id, answered_by: analyst1.id}
+            Repo.insert! %QRouting{question_id: q.id, answered_by: analyst2.id}
         end  
     end)
     
     conn = get conn, question_path(conn, :index, user.id)
-    assert json_response(conn, 200)["data"] == []
+    assert Enum.count(json_response(conn, 200)["data"]) == 10
+    
+    conn = get conn, question_path(conn, :index, user.id, page_size: "2", page_offset: "0")
+    assert Enum.count(json_response(conn, 200)["data"]) == 2
+    
+    conn = get conn, question_path(conn, :index, user.id, page_size: "2", page_offset: "2")
+    assert Enum.count(json_response(conn, 200)["data"]) == 2
   end 
 
-
-#   test "creates and renders resource when data is valid", %{conn: conn} do
-#     conn = post conn, question_path(conn, :create, user_id: 1), question: @valid_attrs
-#     assert json_response(conn, 201)["data"]["id"]
-#     assert Repo.get_by(Question, @valid_attrs)
-#   end
-
+  test "creates and renders resource when data is valid", %{conn: conn} do
+    user = Repo.insert! %User{email: "testuser1@example.com"}
+    conn = post conn, question_path(conn, :create, user.id), @valid_attrs
+    assert json_response(conn, 201)["question"]
+    assert Repo.get_by(Question, @valid_attrs)
+  end
+  
 end
