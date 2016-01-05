@@ -1,9 +1,9 @@
-defmodule BuckcalcWeb.QuestionControllerTest do
-  use BuckcalcWeb.ConnCase
+defmodule BuckcalcApi.QuestionControllerTest do
+  use BuckcalcApi.ConnCase
 
-  alias BuckcalcWeb.Question
-  alias BuckcalcWeb.User
-  alias BuckcalcWeb.QRouting
+  alias BuckcalcApi.Question
+  alias BuckcalcApi.User
+  alias BuckcalcApi.QRouting
   import Ecto.Repo
   import Ecto.Query
   

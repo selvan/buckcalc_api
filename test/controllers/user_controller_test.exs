@@ -1,7 +1,7 @@
-defmodule BuckcalcWeb.UserControllerTest do
-  use BuckcalcWeb.ConnCase
+defmodule BuckcalcApi.UserControllerTest do
+  use BuckcalcApi.ConnCase
 
-  alias BuckcalcWeb.User
+  alias BuckcalcApi.User
   @valid_attrs %{email: "some content", name: "some content", password_digest: "some content", role: "some content"}
   @invalid_attrs %{email: nil}
 

@@ -1,4 +1,4 @@
-# BuckcalcWeb
+# BuckcalcApi
 
 To start your Phoenix app:
 

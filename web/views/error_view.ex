@@ -1,5 +1,5 @@
-defmodule BuckcalcWeb.ErrorView do
-  use BuckcalcWeb.Web, :view
+defmodule BuckcalcApi.ErrorView do
+  use BuckcalcApi.Web, :view
 
   def render("404.html", _assigns) do
     "Page not found"

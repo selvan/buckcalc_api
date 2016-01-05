@@ -1,4 +1,4 @@
-defmodule BuckcalcWeb.ModelCase do
+defmodule BuckcalcApi.ModelCase do
   @moduledoc """
   This module defines the test case to be used by
   model tests.
@@ -16,16 +16,16 @@ defmodule BuckcalcWeb.ModelCase do
 
   using do
     quote do
-      alias BuckcalcWeb.Repo
+      alias BuckcalcApi.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
-      import BuckcalcWeb.ModelCase
+      import BuckcalcApi.ModelCase
     end
   end
 
   setup tags do
     unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(BuckcalcWeb.Repo, [])
+      Ecto.Adapters.SQL.restart_test_transaction(BuckcalcApi.Repo, [])
     end
 
     :ok

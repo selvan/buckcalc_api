@@ -1,4 +1,4 @@
-defmodule BuckcalcWeb.Repo.Migrations.CreateUser do
+defmodule BuckcalcApi.Repo.Migrations.CreateUser do
   use Ecto.Migration
 
   def change do

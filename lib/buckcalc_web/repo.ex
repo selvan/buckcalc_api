@@ -1,3 +1,3 @@
-defmodule BuckcalcWeb.Repo do
-  use Ecto.Repo, otp_app: :buckcalc_web
+defmodule BuckcalcApi.Repo do
+  use Ecto.Repo, otp_app: :buckcalc_api
 end

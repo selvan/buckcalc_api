@@ -1,8 +1,8 @@
-defmodule BuckcalcWeb.Mixfile do
+defmodule BuckcalcApi.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :buckcalc_web,
+    [app: :buckcalc_api,
      version: "0.0.1",
      elixir: "~> 1.0",
      elixirc_paths: elixirc_paths(Mix.env),
@@ -17,7 +17,7 @@ defmodule BuckcalcWeb.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {BuckcalcWeb, []},
+    [mod: {BuckcalcApi, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex]]
   end

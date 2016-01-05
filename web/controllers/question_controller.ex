@@ -1,7 +1,7 @@
-defmodule BuckcalcWeb.QuestionController do
-  use BuckcalcWeb.Web, :controller
+defmodule BuckcalcApi.QuestionController do
+  use BuckcalcApi.Web, :controller
 
-  alias BuckcalcWeb.Question
+  alias BuckcalcApi.Question
   import Ecto.Query
   
   plug :scrub_params, "question" when action in [:create]
@@ -44,7 +44,7 @@ defmodule BuckcalcWeb.QuestionController do
         
         conn
         |> put_status(:unprocessable_entity)
-        |> render(BuckcalcWeb.ChangesetView, "error.json", changeset: changeset)
+        |> render(BuckcalcApi.ChangesetView, "error.json", changeset: changeset)
     end
   end
 
@@ -63,7 +63,7 @@ defmodule BuckcalcWeb.QuestionController do
 #       {:error, changeset} ->
 #         conn
 #         |> put_status(:unprocessable_entity)
-#         |> render(BuckcalcWeb.ChangesetView, "error.json", changeset: changeset)
+#         |> render(BuckcalcApi.ChangesetView, "error.json", changeset: changeset)
 #     end
 #   end
 

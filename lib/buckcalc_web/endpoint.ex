@@ -1,14 +1,14 @@
-defmodule BuckcalcWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :buckcalc_web
+defmodule BuckcalcApi.Endpoint do
+  use Phoenix.Endpoint, otp_app: :buckcalc_api
 
-  socket "/socket", BuckcalcWeb.UserSocket
+  socket "/socket", BuckcalcApi.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :buckcalc_web, gzip: false,
+    at: "/", from: :buckcalc_api, gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
@@ -32,8 +32,8 @@ defmodule BuckcalcWeb.Endpoint do
 
   plug Plug.Session,
     store: :cookie,
-    key: "_buckcalc_web_key",
+    key: "_buckcalc_api_key",
     signing_salt: "zUdpsf3U"
 
-  plug BuckcalcWeb.Router
+  plug BuckcalcApi.Router
 end

@@ -1,12 +1,12 @@
-defmodule BuckcalcWeb.UserView do
-  use BuckcalcWeb.Web, :view
+defmodule BuckcalcApi.UserView do
+  use BuckcalcApi.Web, :view
 
   def render("index.json", %{users: users}) do
-    %{data: render_many(users, BuckcalcWeb.UserView, "user.json")}
+    %{data: render_many(users, BuckcalcApi.UserView, "user.json")}
   end
 
   def render("show.json", %{user: user}) do
-    %{data: render_one(user, BuckcalcWeb.UserView, "user.json")}
+    %{data: render_one(user, BuckcalcApi.UserView, "user.json")}
   end
 
   def render("user.json", %{user: user}) do

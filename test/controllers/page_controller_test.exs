@@ -1,5 +1,5 @@
-defmodule BuckcalcWeb.PageControllerTest do
-  use BuckcalcWeb.ConnCase
+defmodule BuckcalcApi.PageControllerTest do
+  use BuckcalcApi.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"

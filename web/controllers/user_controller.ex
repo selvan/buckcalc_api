@@ -1,7 +1,7 @@
-defmodule BuckcalcWeb.UserController do
-  use BuckcalcWeb.Web, :controller
+defmodule BuckcalcApi.UserController do
+  use BuckcalcApi.Web, :controller
 
-  alias BuckcalcWeb.User
+  alias BuckcalcApi.User
 
   plug :scrub_params, "user" when action in [:create, :update]
 
@@ -22,7 +22,7 @@ defmodule BuckcalcWeb.UserController do
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(BuckcalcWeb.ChangesetView, "error.json", changeset: changeset)
+        |> render(BuckcalcApi.ChangesetView, "error.json", changeset: changeset)
     end
   end
 
@@ -41,7 +41,7 @@ defmodule BuckcalcWeb.UserController do
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(BuckcalcWeb.ChangesetView, "error.json", changeset: changeset)
+        |> render(BuckcalcApi.ChangesetView, "error.json", changeset: changeset)
     end
   end
 

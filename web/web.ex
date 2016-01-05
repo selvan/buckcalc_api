@@ -1,12 +1,12 @@
-defmodule BuckcalcWeb.Web do
+defmodule BuckcalcApi.Web do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use BuckcalcWeb.Web, :controller
-      use BuckcalcWeb.Web, :view
+      use BuckcalcApi.Web, :controller
+      use BuckcalcApi.Web, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -30,12 +30,12 @@ defmodule BuckcalcWeb.Web do
     quote do
       use Phoenix.Controller
 
-      alias BuckcalcWeb.Repo
+      alias BuckcalcApi.Repo
       import Ecto
       import Ecto.Query, only: [from: 1, from: 2]
 
-      import BuckcalcWeb.Router.Helpers
-      import BuckcalcWeb.Gettext
+      import BuckcalcApi.Router.Helpers
+      import BuckcalcApi.Gettext
     end
   end
 
@@ -49,9 +49,9 @@ defmodule BuckcalcWeb.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import BuckcalcWeb.Router.Helpers
-      import BuckcalcWeb.ErrorHelpers
-      import BuckcalcWeb.Gettext
+      import BuckcalcApi.Router.Helpers
+      import BuckcalcApi.ErrorHelpers
+      import BuckcalcApi.Gettext
     end
   end
 
@@ -65,10 +65,10 @@ defmodule BuckcalcWeb.Web do
     quote do
       use Phoenix.Channel
 
-      alias BuckcalcWeb.Repo
+      alias BuckcalcApi.Repo
       import Ecto
       import Ecto.Query, only: [from: 1, from: 2]
-      import BuckcalcWeb.Gettext
+      import BuckcalcApi.Gettext
     end
   end
 

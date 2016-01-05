@@ -1,11 +1,11 @@
-defmodule BuckcalcWeb.ChangesetView do
-  use BuckcalcWeb.Web, :view
+defmodule BuckcalcApi.ChangesetView do
+  use BuckcalcApi.Web, :view
 
   @doc """
   Traverses and translates changeset errors.
 
   See `Ecto.Changeset.traverse_errors/2` and
-  `BuckcalcWeb.ErrorHelpers.translate_error/1` for more details.
+  `BuckcalcApi.ErrorHelpers.translate_error/1` for more details.
   """
   def translate_errors(changeset) do
     Ecto.Changeset.traverse_errors(changeset, &translate_error/1)

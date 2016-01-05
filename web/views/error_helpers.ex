@@ -1,4 +1,4 @@
-defmodule BuckcalcWeb.ErrorHelpers do
+defmodule BuckcalcApi.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -26,10 +26,10 @@ defmodule BuckcalcWeb.ErrorHelpers do
     #
     #     dngettext "errors", "1 file", "%{count} files", count
     #
-    Gettext.dngettext(BuckcalcWeb.Gettext, "errors", msg, msg, opts[:count], opts)
+    Gettext.dngettext(BuckcalcApi.Gettext, "errors", msg, msg, opts[:count], opts)
   end
 
   def translate_error(msg) do
-    Gettext.dgettext(BuckcalcWeb.Gettext, "errors", msg)
+    Gettext.dgettext(BuckcalcApi.Gettext, "errors", msg)
   end
 end

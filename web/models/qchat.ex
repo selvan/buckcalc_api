@@ -1,12 +1,12 @@
-defmodule BuckcalcWeb.QChat do
-  use BuckcalcWeb.Web, :model
+defmodule BuckcalcApi.QChat do
+  use BuckcalcApi.Web, :model
 
   schema "qchat" do
     field :body, :string
     timestamps
     
-    belongs_to :qroutings, BuckcalcWeb.QRouting, foreign_key: :qrouting_id
-    belongs_to :sender, {"user", BuckcalcWeb.User}, foreign_key: :sent_by
+    belongs_to :qroutings, BuckcalcApi.QRouting, foreign_key: :qrouting_id
+    belongs_to :sender, {"user", BuckcalcApi.User}, foreign_key: :sent_by
   end
 
   @required_fields ~w(qrouting_id sent_by body)

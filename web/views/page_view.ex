@@ -1,3 +1,3 @@
-defmodule BuckcalcWeb.PageView do
-  use BuckcalcWeb.Web, :view
+defmodule BuckcalcApi.PageView do
+  use BuckcalcApi.Web, :view
 end

@@ -1,4 +1,4 @@
-defmodule BuckcalcWeb.Repo.Migrations.CreateQrouter do
+defmodule BuckcalcApi.Repo.Migrations.CreateQrouter do
   use Ecto.Migration
 
   def change do

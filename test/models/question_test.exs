@@ -1,7 +1,7 @@
-defmodule BuckcalcWeb.QuestionTest do
-  use BuckcalcWeb.ModelCase
+defmodule BuckcalcApi.QuestionTest do
+  use BuckcalcApi.ModelCase
 
-  alias BuckcalcWeb.Question
+  alias BuckcalcApi.Question
 
   @valid_attrs %{}
   @invalid_attrs %{}

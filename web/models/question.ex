@@ -1,12 +1,12 @@
-defmodule BuckcalcWeb.Question do
-  use BuckcalcWeb.Web, :model
+defmodule BuckcalcApi.Question do
+  use BuckcalcApi.Web, :model
 
   schema "questions" do
     field :question, :string
-    belongs_to :owner, {"users", BuckcalcWeb.User}, foreign_key: :asked_by
+    belongs_to :owner, {"users", BuckcalcApi.User}, foreign_key: :asked_by
     timestamps
 
-    has_many :routings, BuckcalcWeb.QRouting
+    has_many :routings, BuckcalcApi.QRouting
     has_many :analysts, through: [:routings, :analyst]
   end
 

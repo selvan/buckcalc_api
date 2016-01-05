@@ -6,12 +6,12 @@
 use Mix.Config
 
 # Configures the endpoint
-config :buckcalc_web, BuckcalcWeb.Endpoint,
+config :buckcalc_api, BuckcalcApi.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
   secret_key_base: "G1jDPUtUocfmr0vZu9WG/HVN6ZhmrmpX0Hu/craol3u61Vm6wZzz9P4+/dNDkAUW",
   render_errors: [accepts: ~w(html json)],
-  pubsub: [name: BuckcalcWeb.PubSub,
+  pubsub: [name: BuckcalcApi.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger

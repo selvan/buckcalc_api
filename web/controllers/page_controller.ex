@@ -1,5 +1,5 @@
-defmodule BuckcalcWeb.PageController do
-  use BuckcalcWeb.Web, :controller
+defmodule BuckcalcApi.PageController do
+  use BuckcalcApi.Web, :controller
 
   def index(conn, _params) do
     render conn, "index.html"

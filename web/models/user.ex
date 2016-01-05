@@ -1,5 +1,5 @@
-defmodule BuckcalcWeb.User do
-  use BuckcalcWeb.Web, :model
+defmodule BuckcalcApi.User do
+  use BuckcalcApi.Web, :model
 
   schema "users" do
     field :name, :string
@@ -8,7 +8,7 @@ defmodule BuckcalcWeb.User do
     field :role, :string
     timestamps
 
-    has_many :questions, BuckcalcWeb.Question, foreign_key: :asked_by
+    has_many :questions, BuckcalcApi.Question, foreign_key: :asked_by
   end
 
   @required_fields ~w(email)

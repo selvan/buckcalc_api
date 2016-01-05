@@ -1,3 +1,3 @@
-defmodule BuckcalcWeb.LayoutViewTest do
-  use BuckcalcWeb.ConnCase, async: true
+defmodule BuckcalcApi.LayoutViewTest do
+  use BuckcalcApi.ConnCase, async: true
 end

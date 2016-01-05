@@ -5,18 +5,18 @@
 # Inside the script, you can read and write to any of your
 # repositories directly:
 #
-#     BuckcalcWeb.Repo.insert!(%BuckcalcWeb.SomeModel{})
+#     BuckcalcApi.Repo.insert!(%BuckcalcApi.SomeModel{})
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-alias BuckcalcWeb.Repo
+alias BuckcalcApi.Repo
 import Ecto.Query
 
-alias BuckcalcWeb.User
-alias BuckcalcWeb.Question
-alias BuckcalcWeb.QRouting
-alias BuckcalcWeb.QChat
+alias BuckcalcApi.User
+alias BuckcalcApi.Question
+alias BuckcalcApi.QRouting
+alias BuckcalcApi.QChat
 
 
 users = [
@@ -44,7 +44,7 @@ defmodule Seeds do
 	def add_users([]), do: nil
 	def add_users([h|t]) do
 		changeset = User.changeset(%User{}, h)
-		BuckcalcWeb.Repo.insert!(changeset)
+		BuckcalcApi.Repo.insert!(changeset)
 		add_users t
 	end
 
@@ -54,7 +54,7 @@ defmodule Seeds do
 		qdata = h
 		u=fetch_user(qdata.asked_by)
 		changeset = Question.changeset(%Question{}, %{question: qdata.question, asked_by: u.id})
-		q=BuckcalcWeb.Repo.insert!(changeset)
+		q=BuckcalcApi.Repo.insert!(changeset)
 		r=add_routing(q, qdata.answered_by)
 		add_chat(r, qdata.chat)
 		add_questions(t)
@@ -64,7 +64,7 @@ defmodule Seeds do
 	def add_routing(q, answered_by_email) do
 		u=fetch_user(answered_by_email)
 		changeset = QRouting.changeset(%QRouting{}, %{question_id: q.id, answered_by: u.id})
-		BuckcalcWeb.Repo.insert!(changeset)	
+		BuckcalcApi.Repo.insert!(changeset)	
 	end
 
 	## Add Chat
@@ -73,7 +73,7 @@ defmodule Seeds do
 		{sender_email, body} = h
 		u=fetch_user(sender_email)
 		changeset = QChat.changeset(%QChat{}, %{qrouting_id: r.id, body: body, sent_by: u.id})
-		BuckcalcWeb.Repo.insert!(changeset)	
+		BuckcalcApi.Repo.insert!(changeset)	
 		add_chat(r, t)
 	end
 

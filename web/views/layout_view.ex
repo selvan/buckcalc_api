@@ -1,3 +1,3 @@
-defmodule BuckcalcWeb.LayoutView do
-  use BuckcalcWeb.Web, :view
+defmodule BuckcalcApi.LayoutView do
+  use BuckcalcApi.Web, :view
 end

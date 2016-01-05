@@ -1,3 +1,3 @@
-defmodule BuckcalcWeb.PageViewTest do
-  use BuckcalcWeb.ConnCase, async: true
+defmodule BuckcalcApi.PageViewTest do
+  use BuckcalcApi.ConnCase, async: true
 end

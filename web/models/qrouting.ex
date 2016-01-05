@@ -1,12 +1,12 @@
-defmodule BuckcalcWeb.QRouting do
-  use BuckcalcWeb.Web, :model
+defmodule BuckcalcApi.QRouting do
+  use BuckcalcApi.Web, :model
 
   schema "qroutings" do
-    belongs_to :question, BuckcalcWeb.Question
-    belongs_to :analyst, {"users", BuckcalcWeb.User}, foreign_key: :answered_by
+    belongs_to :question, BuckcalcApi.Question
+    belongs_to :analyst, {"users", BuckcalcApi.User}, foreign_key: :answered_by
     timestamps
     
-    has_many :chats, {"qchat", BuckcalcWeb.QChat}, foreign_key: :qrouting_id
+    has_many :chats, {"qchat", BuckcalcApi.QChat}, foreign_key: :qrouting_id
   end
 
   @required_fields ~w(question_id answered_by)

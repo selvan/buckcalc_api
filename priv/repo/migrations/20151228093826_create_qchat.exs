@@ -1,4 +1,4 @@
-defmodule BuckcalcWeb.Repo.Migrations.CreateQchat do
+defmodule BuckcalcApi.Repo.Migrations.CreateQchat do
   use Ecto.Migration
 
   def change do
