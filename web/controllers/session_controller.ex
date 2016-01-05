@@ -4,15 +4,20 @@ defmodule BuckcalcApi.SessionController do
   alias BuckcalcApi.User
   import Ecto.Query
 
-  def new(conn, _params) do
-    render conn, "index.html"
+    plug :scrub_params, "user" when action in [:sign_in]
+
+  def new(conn, auth_params) do
+    changeset = User.changeset(%User{}, auth_params)
+    render conn, "new.html", changeset: changeset 
   end
   
-  def sign_in(conn, %{"email" => email, "password" => password}) do
-    user = User |> Repo.get_by(email: email, password_digest: password)
+  def sign_in(conn, %{"user" => auth_params}) do
+    user = User |> Repo.get_by(email: auth_params["email"], password_digest: auth_params["password"])
     
     case user do
-        nil -> redirect conn, to: session_path(conn, :new, %{email: email, password: password})
+        nil ->
+            conn |> put_flash(:error, "Auth invalid") 
+            new(conn, auth_params)
         _ ->
             conn
             |> put_flash(:info, "Logged in.")

@@ -6,12 +6,14 @@ defmodule BuckcalcApi.User do
     field :email, :string
     field :password_digest, :string
     field :role, :string
+    field :password, :string, virtual: true
+    field :password_confirmation, :string, virtual: true    
     timestamps
 
     has_many :questions, BuckcalcApi.Question, foreign_key: :asked_by
   end
 
-  @required_fields ~w(email)
+  @required_fields ~w(email password password_confirmation)
   @optional_fields ~w(name password_digest role)
 
   @doc """
