@@ -34,6 +34,6 @@ defmodule BuckcalcApi.SessionController do
   
   # callback 
     def unauthenticated(conn, params) do
-        redirect conn, to: user_path(conn, :sign_in, params)
+        redirect conn, to: session_path(conn, :sign_in, params)
     end
 end
