@@ -39,5 +39,5 @@ config :buckcalc_api, BuckcalcApi.Repo,
   username: "postgres",
   password: "postgres",
   database: "buckcalc_api_dev",
-  hostname: "localhost",
+  hostname: "192.168.99.100",
   pool_size: 10

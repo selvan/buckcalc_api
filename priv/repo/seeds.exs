@@ -20,10 +20,10 @@ alias BuckcalcApi.QChat
 
 
 users = [
-	%{email: "user1@example.com"},
-	%{email: "user2@example.com"},
-	%{email: "analyst1@example.com"},
-	%{email: "analyst2@example.com"},	
+	%{email: "user1@example.com", password_digest: "1"},
+	%{email: "user2@example.com", password_digest: "1"},
+	%{email: "analyst1@example.com", password_digest: "1", role: "analyst"},
+	%{email: "analyst2@example.com", password_digest: "1", role: "analyst"},	
 ]
 
 questions = [
