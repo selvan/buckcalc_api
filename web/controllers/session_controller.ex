@@ -16,8 +16,9 @@ defmodule BuckcalcApi.SessionController do
     
     case user do
         nil ->
-            conn |> put_flash(:error, "Auth invalid") 
-            new(conn, auth_params)
+            conn 
+            |> put_flash(:error, "Auth invalid")
+            |> new(auth_params)
         _ ->
             conn
             |> put_flash(:info, "Logged in.")
