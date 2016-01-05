@@ -17,7 +17,13 @@ defmodule BuckcalcWeb.QuestionController do
         {poffset, _} -> poffset
     end          
     record_offset = page_offset * page_size
-    query = Question |> where([q], q.asked_by == ^user_id) |> preload([:analysts]) |> order_by([:inserted_at, :id]) |> limit(^page_size) |> offset(^record_offset)
+    query = Question 
+    |> where([q], q.asked_by == ^user_id) 
+    |> preload([:analysts]) 
+    |> order_by([:inserted_at, :id]) 
+    |> limit(^page_size) 
+    |> offset(^record_offset)
+    
     questions = query |> Repo.all
     render(conn, "questions.json", questions: questions)
   end
