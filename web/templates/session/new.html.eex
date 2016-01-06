@@ -1,4 +1,4 @@
-<%= form_for @changeset, session_path(@conn, :sign_in), fn f -> %>
+<%= form_for @changeset, session_path(@conn, :login), fn f -> %>
   <label>
     Email: <%= text_input f, :email %>
   </label>

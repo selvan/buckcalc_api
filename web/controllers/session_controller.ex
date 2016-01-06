@@ -4,14 +4,14 @@ defmodule BuckcalcApi.SessionController do
   alias BuckcalcApi.User
   import Ecto.Query
 
-    plug :scrub_params, "user" when action in [:sign_in]
+    plug :scrub_params, "user" when action in [:login]
 
   def new(conn, auth_params) do
     changeset = User.changeset(%User{}, auth_params)
     render conn, "new.html", changeset: changeset 
   end
   
-  def sign_in(conn, %{"user" => auth_params}) do
+  def login(conn, %{"user" => auth_params}) do
     %{"email" => email, "password" => password} = auth_params
     
     user = case {email, password} do
@@ -38,7 +38,7 @@ defmodule BuckcalcApi.SessionController do
     end
   end
   
-  def sign_out(conn, _params) do
+  def logout(conn, _params) do
     Guardian.Plug.sign_out(conn)
     |> put_flash(:info, "Logged out successfully.")
     |> redirect(to: "/")

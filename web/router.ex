@@ -22,9 +22,9 @@ defmodule BuckcalcApi.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    get "/sign_in", SessionController, :new
-    post "/sign_in", SessionController, :sign_in
-    get "/sign_out", SessionController, :sign_out
+    get "/login", SessionController, :new
+    post "/login", SessionController, :login
+    get "/logout", SessionController, :logout
   end
 
   # Other scopes may use custom stacks.
