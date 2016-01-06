@@ -1,4 +1,4 @@
-defmodule BuckcalcApi.SessionController do
+defmodule BuckcalcApi.SessionWebController do
   use BuckcalcApi.Web, :controller
 
   alias BuckcalcApi.User
@@ -12,7 +12,7 @@ defmodule BuckcalcApi.SessionController do
   end
   
   def sign_in(conn, %{"user" => auth_params}) do
-    user = User.fetch_for_auth(auth_params)
+    user = User.fetch_for_auth(auth_params)  
     case user do
         nil ->
             conn 
@@ -36,6 +36,6 @@ defmodule BuckcalcApi.SessionController do
     def unauthenticated(conn, _params) do
         conn 
         |> put_flash(:warn, "Signin to proceed further") 
-        |> redirect to: session_path(conn, :new)
+        |> redirect to: session_web_path(conn, :new)
     end
 end

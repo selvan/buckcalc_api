@@ -28,7 +28,12 @@ defmodule BuckcalcApi.User do
     |> unique_constraint(:email)
   end
   
-  def fetch_for_auth(%{"email"=> email, "password" => password}) do
-    User |> Repo.get_by(email: email, password_digest: password)
+  def fetch_for_auth(%{"email" => email, "password" => password}) do
+    case {email, password} do
+        {nil, _} -> nil
+        {_, nil} -> nil
+        {_, _} ->
+            BuckcalcApi.User |> BuckcalcApi.Repo.get_by(email: email, password_digest: password)
+    end
   end
 end
