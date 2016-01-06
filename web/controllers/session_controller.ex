@@ -12,8 +12,7 @@ defmodule BuckcalcApi.SessionController do
   end
   
   def sign_in(conn, %{"user" => auth_params}) do
-    user = User |> Repo.get_by(email: auth_params["email"], password_digest: auth_params["password"])
-    
+    user = User.fetch_for_auth(auth_params)
     case user do
         nil ->
             conn 
@@ -34,7 +33,9 @@ defmodule BuckcalcApi.SessionController do
   end
   
   # callback 
-    def unauthenticated(conn, params) do
-        redirect conn, to: session_path(conn, :sign_in, params)
+    def unauthenticated(conn, _params) do
+        conn 
+        |> put_flash(:warn, "Signin to proceed further") 
+        |> redirect to: session_path(conn, :new)
     end
 end
