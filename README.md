@@ -1,5 +1,14 @@
 # BuckcalcApi
 
+## Phoenix project spike
+
+    * This project covers jason web token based user authenication for web and api using uberauth.
+    * See test/controllers/user_controller_test.exs and test/controllers/session_controller_test.exs for functional tests
+    * We use postgresql along side ecto
+    * Seed database by running, mix run priv/repo/seeds.exs
+
+## Starting
+
 To start your Phoenix app:
 
   1. Install dependencies with `mix deps.get`
@@ -17,3 +26,5 @@ Ready to run in production? Please [check our deployment guides](http://www.phoe
   * Docs: http://hexdocs.pm/phoenix
   * Mailing list: http://groups.google.com/group/phoenix-talk
   * Source: https://github.com/phoenixframework/phoenix
+
+

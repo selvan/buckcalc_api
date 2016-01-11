@@ -12,6 +12,9 @@ defmodule BuckcalcApi.Router do
     plug Guardian.Plug.LoadResource    
   end
 
+  pipeline :in_email do
+  end
+  
   pipeline :api do
     plug :accepts, ["json"]
     plug Guardian.Plug.VerifyHeader
@@ -22,10 +25,26 @@ defmodule BuckcalcApi.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    
+    get "/users", UserController, :new
+    post "/users", UserController, :create
+    get "/users/:id", UserController, :show
+    post "/users/:id", UserController, :update
+    post "/users/:id/delete", UserController, :delete
+    get "/users/:id/activate", UserController, :activate
+    get "/users/reset", UserController, :reset
+    post "/users/reset", UserController, :reset 
+    
     get "/login", SessionController, :new
     post "/login", SessionController, :login
     get "/logout", SessionController, :logout
   end
+
+    scope "/", BuckcalcApi do
+        pipe_through :in_email 
+        post "/in_email", MailController, :in_email
+    end    
+    
 
   # Other scopes may use custom stacks.
   scope "/api", BuckcalcApi do
